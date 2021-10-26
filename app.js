@@ -1,24 +1,121 @@
-const result = document.querySelector('#display');
-const ac = document.querySelector('#ac');
-const plusMinus = document.querySelector('#plusMinus');
-const percentage = document.querySelector('#percentage');
-const quotient = document.querySelector('#quotient');
-const seven = document.querySelector('#seven');
-const eight = document.querySelector('#eight');
-const nine = document.querySelector('#nine');
-const multiplication = document.querySelector('#multiplication');
-const four = document.querySelector('#four');
-const five = document.querySelector('#five');
-const six = document.querySelector('#six');
-const subtraction = document.querySelector('#subtraction');
-const one = document.querySelector('#one');
-const two = document.querySelector('#two');
-const three = document.querySelector('#three');
-const addition = document.querySelector('#addition');
-const zero = document.querySelector('#zero');
-const decimal = document.querySelector('#decimal');
-const equal = document.querySelector('#equal');
+var plusMinus = document.querySelector('#plusMinus');
+var percentage = document.querySelector('#percentage');
+var quotient = document.querySelector('#quotient');
+var seven = document.querySelector('#seven');
+var eight = document.querySelector('#eight');
+var nine = document.querySelector('#nine');
+var multiplication = document.querySelector('#multiplication');
+var four = document.querySelector('#four');
+var five = document.querySelector('#five');
+var six = document.querySelector('#six');
+var subtraction = document.querySelector('#subtraction');
+var one = document.querySelector('#one');
+var two = document.querySelector('#two');
+var three = document.querySelector('#three');
+var addition = document.querySelector('#addition');
+var zero = document.querySelector('#zero');
+var decimal = document.querySelector('#decimal');
+var equal = document.querySelector('#equal');
+var result = document.querySelector('#display');
+var ac = document.querySelector('#ac');
+var numbers = [zero, one, two, three, four, five, six, seven, eight, nine, decimal];
+var currentNumber = '';
+var operators = ['+', '-', 'x', '÷'];
+var lastChar;
 
-const numbers = [zero, one, two, three, four, five, six, seven, eight, nine];
+for (let i = 0; i < numbers.length; i++) {
+  numbers[i].addEventListener('click', function () {
+    // if (display.innerHTML.length < 8) {
+    currentNumber += numbers[i].innerHTML;
+    updateDisplay(currentNumber);
+    // }
+  });
+}
 
+function updateDisplay(msg) {
+  if (msg.toString().length < 9) {
+    result.innerHTML = msg;
+  } else if (msg > 11111111) {
+    result.innerHTML = 'error';
+  } else {
+    result.innerHTML = msg.toString().substring(0, 5);
+  }
+}
 
+addition.addEventListener('click', function () {
+  lastChar = result.innerHTML;
+  lastChar = lastChar[lastChar.length - 1];
+  if (operators.indexOf(lastChar) == -1) {
+    currentNumber += '+';
+    updateDisplay(currentNumber);
+  } else {
+    currentNumber = currentNumber.substring(0, currentNumber.length - 1);
+    currentNumber += '+';
+    updateDisplay(currentNumber);
+  }
+});
+
+subtraction.addEventListener('click', function () {
+  lastChar = result.innerHTML;
+  lastChar = lastChar[lastChar.length - 1];
+  if (operators.indexOf(lastChar) == -1) {
+    currentNumber += '-';
+    updateDisplay(currentNumber);
+  } else {
+    currentNumber = currentNumber.substring(0, currentNumber.length - 1);
+    currentNumber += '-';
+    updateDisplay(currentNumber);
+  }
+});
+
+multiplication.addEventListener('click', function () {
+  lastChar = result.innerHTML;
+  lastChar = lastChar[lastChar.length - 1];
+  if (operators.indexOf(lastChar) == -1) {
+    currentNumber += '*';
+    updateDisplay(currentNumber);
+  } else {
+    currentNumber = currentNumber.substring(0, currentNumber.length - 1);
+    currentNumber += '*';
+    updateDisplay(currentNumber);
+  }
+});
+
+quotient.addEventListener('click', function () {
+  lastChar = result.innerHTML;
+  lastChar = lastChar[lastChar.length - 1];
+  if (operators.indexOf(lastChar) == -1) {
+    currentNumber += '/';
+    updateDisplay(currentNumber);
+  } else {
+    currentNumber = currentNumber.substring(0, currentNumber.length - 1);
+    currentNumber += '/';
+    updateDisplay(currentNumber);
+  }
+});
+
+percentage.addEventListener('click', function () {
+  result.innerHTML = result.innerHTML / 100;
+});
+
+plusMinus.addEventListener('click', function () {
+  if (result.innerHTML[0] !== '-') {
+    result.innerHTML = '-' + result.innerHTML;
+  } else {
+    result.innerHTML = result.innerHTML.slice(1, result.innerHTML.length);
+  }
+});
+
+equal.addEventListener('click', function () {
+  if (typeof eval(currentNumber) == 'number') {
+    currentNumber = eval(currentNumber);
+    updateDisplay(currentNumber);
+  } else {
+    updateDisplay('error');
+  }
+});
+
+ac.addEventListener('click', function () {
+  currentNumber = '';
+  updateDisplay(currentNumber);
+});
