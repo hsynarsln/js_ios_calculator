@@ -116,6 +116,6 @@ equal.addEventListener('click', function () {
 });
 
 ac.addEventListener('click', function () {
-  currentNumber = '';
+  currentNumber = '0';
   updateDisplay(currentNumber);
 });
