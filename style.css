@@ -16,7 +16,7 @@ body {
   margin: auto;
 }
 .container-display {
-  font-size: 130px;
+  font-size: 6rem;
   font-weight: 300;
   height: 30%;
   display: flex;

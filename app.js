@@ -20,25 +20,21 @@ var result = document.querySelector('#display');
 var ac = document.querySelector('#ac');
 var numbers = [zero, one, two, three, four, five, six, seven, eight, nine, decimal];
 var currentNumber = '';
-var operators = ['+', '-', 'x', '÷'];
+var operators = ['+', '-', '*', '/'];
 var lastChar;
 
 for (let i = 0; i < numbers.length; i++) {
   numbers[i].addEventListener('click', function () {
-    // if (display.innerHTML.length < 8) {
     currentNumber += numbers[i].innerHTML;
     updateDisplay(currentNumber);
-    // }
   });
 }
 
-function updateDisplay(msg) {
-  if (msg.toString().length < 9) {
-    result.innerHTML = msg;
-  } else if (msg > 11111111) {
-    result.innerHTML = 'error';
+function updateDisplay(value) {
+  if (value.toString().length < 8) {
+    result.innerHTML = value;
   } else {
-    result.innerHTML = msg.toString().substring(0, 5);
+    result.innerHTML = value.toString().substring(0, 8);
   }
 }
 
@@ -116,6 +112,6 @@ equal.addEventListener('click', function () {
 });
 
 ac.addEventListener('click', function () {
-  currentNumber = '0';
-  updateDisplay(currentNumber);
+  result.innerHTML = '0';
+  currentNumber = '';
 });
